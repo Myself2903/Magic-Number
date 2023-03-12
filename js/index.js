@@ -2,7 +2,6 @@
 $('document').ready(function(){
     init();
 
-
     $('form').submit(function(event){
         event.preventDefault();
         send();
@@ -18,7 +17,11 @@ $('document').ready(function(){
         console.log("magic num: " + magicNum);
         $('#status').hide();
         $('#attempted').hide();
-        $('#attempted span').text("");
+        $('#attempted').html(`
+            <tr>
+                <th colspan="2">Valores Intentados</td>
+            </tr>`
+        );
     }
 
     function send(){
@@ -29,6 +32,12 @@ $('document').ready(function(){
             if(answer == ''){
                 $('#status').text("no has ingresado ningun valor.");
             }else{
+                $('#attempted').show();
+                $('#attempted').append(`
+                <tr>
+                    <td>${11-tries}</td>                    
+                    <td>${answer}</td>                
+                </tr>`);
                 if(magicNum > answer){
                     $('#status').text("El numero es muy pequeño! "); 
                     tries--;
@@ -41,10 +50,10 @@ $('document').ready(function(){
                     $('#status').text("Adivinaste el numero magico! ");
                     tries = -1;
                 }
-        
-                $('#attempted').show();
-                $('#attempted span').append(" "+answer);
             }    
+                
+        
+
 
         }else if(tries < 0){
             alert("el juego a terminado, reinicia para continuar");

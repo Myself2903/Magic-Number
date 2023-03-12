@@ -1,0 +1,37 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+#game{
+    display: inline-flex;
+    position: relative;
+    height: 4em;
+    width: 100%;
+    /* align-items: center; */
+    justify-content: center;
+}
+
+
+form{
+    position: absolute;
+}
+
+form input[type="button"]{
+    margin-top: 5px;
+}
+
+#attempted{
+    text-align: center;
+    border-collapse: collapse;
+    position: relative;
+    right: 15em;
+}
+
+#attempted td, #attempted th{
+    border: 1px solid black;
+    padding: 3px;
+}
+
+
+
