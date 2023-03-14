@@ -1,21 +1,34 @@
 
 $('document').ready(function(){
-    init();
-
-    $('form').submit(function(event){
+    mainPage();
+    
+    $('#home_button').on('click', mainPage);    //Return to mainPage
+    $('#classic_game').on("click", start_game ); //start a classic game   
+    $('#send_button').on("click", send);    //send an answer
+    $('#restart').on("click", start_game);  //restart the classic game
+    $('form').submit(function(event){       //allows enters as send signal
         event.preventDefault();
         send();
     })
-    
-    $('#send_button').on("click", send);
 
-    $('#restart').on("click", init);
+    function mainPage(){
+        $('#selector').show();
+        $('#game, #status').hide();
+    }
 
-    function init(){
+
+    function start_game(){
+        $('#selector').hide();
+        $('#game, #status').show();
+        $('#num_box').val("");
+
+
+
+
         magicNum = Math.floor(Math.random()*100)+1;
         tries = 10;
         console.log("magic num: " + magicNum);
-        $('#status').hide();
+        $('#status').text("Ingresa un numero:");
         $('#attempted').hide();
         $('#attempted').html(`
             <tr>
@@ -26,7 +39,6 @@ $('document').ready(function(){
 
     function send(){
         answer = $('#num_box').val();
-        $('#status').show();
 
         if(tries > 0){
             if(answer == ''){
@@ -51,9 +63,7 @@ $('document').ready(function(){
                     tries = -1;
                 }
             }    
-                
-        
-
+            $('#num_box').focus();
 
         }else if(tries < 0){
             alert("el juego a terminado, reinicia para continuar");

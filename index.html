@@ -8,16 +8,24 @@
     <title>Numero Magico</title>
 </head>
 <body>
-    <header>    
+    <header>
+        <button id="home_button">
+            <img src="./assets/house.png">
+        </button>    
         <h1>Bienvenido al Numero Magico</h1>
         <p>Adivina el numero entre 0 y 100</p>
     </header>
 
     <section id="main_content">
-        <div id="game_status">
-            <p id="status"></p>
-        </div>
+        <div id="selector">
+            <p>Selecciona un modo de juego:</p>
+            <form>
+                <input type="button" id="classic_game" value="Clasico">
+                <input type="button" id="timer_game" value="Limite de tiempo">    
+            </form>
+        </div>        
 
+        <p id="status"></p>
         <div id="game">
             <table id="attempted">
             </table>
