@@ -46,7 +46,7 @@ $('document').ready(function(){
     let interval; //define interval as a global variable
     function start_timer_game(){
         clearInterval(interval); //stops all previous intervals
-        t = 10; //game time
+        t = 60; //game time
         $("#time").html(`${t}s`);   //time set as 60s   
         start_game();   //start game (since uses the same rules)
         $('#time_left').css('visibility', 'visible');   //define as visible the div time_left, for game selection.

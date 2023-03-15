@@ -1,7 +1,15 @@
 *{
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
+    font-size: large;
     /* background-color: rgb(95, 213, 95); */
+}
+
+body{
+    background-image: url("../assets/background.png");
+    background-repeat: no-repeat;
+    background-size: 2000px 1060px;
+    background-position: center 0;
 }
 
 
@@ -9,9 +17,11 @@ header p, header h1{
     margin: 3px;
 }
 
-header p{
-    font-size: large;
+header h1{
+    font-size: xx-large;
 }
+
+
 
 #selector{
     margin-top: 5em;
@@ -20,7 +30,6 @@ header p{
 
 
 input[type="button"], #home_button{
-    font-size: large;
     border-radius: 20px;
     background-color: rgb(181, 71, 71);
     color: white;
@@ -55,7 +64,6 @@ input[type="number"]{
 #status{
     margin-top: 5em;
     margin-bottom: 1em; 
-    font-size: large;
 }
 
 
@@ -94,7 +102,6 @@ input[type="number"]{
     position: relative;
     right: 15em;
     border-radius: 5px;
-    overflow: hidden;
 }
 
 #attempted td, #attempted th{
