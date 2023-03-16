@@ -29,6 +29,11 @@ $('document').ready(function(){
     function start_game(){
         $('#selector').hide();
         $('#game, #status').css("visibility" , "visible");
+        $('#status').css({
+            'font-size': 'large',
+            'color': 'black',
+            'margin-top': '5em'
+        });
         $('#num_box').val(""); //empty the inputbox
         
         magicNum = Math.floor(Math.random()*100)+1; //generate magic number
@@ -77,14 +82,19 @@ $('document').ready(function(){
 
                 if(magicNum > answer){ //lower number
                     $('#status').text("El numero es muy pequeño! "); 
-                    $('#status').append("<b>intentos restantes:<b> " + tries);
                     tries--;
+                    $('#status').append("<b>intentos restantes:<b> " + tries);
                 }else if(magicNum < answer){ //higher number
                     $('#status').text("El numero es muy grande! ");
-                    $('#status').append("<b>intentos restantes:<b> " + tries);
                     tries--;
+                    $('#status').append("<b>intentos restantes:<b> " + tries);
                 }else{ //guessed number
-                    $('#status').text("Adivinaste el numero magico! ");
+                    $('#status').text("Felicidades! Adivinaste el numero magico! ");
+                    $('#status').css({
+                        'font-size': 'xx-large',
+                        'color': 'blue',
+                        'margin-top': '2em'
+                    });
                     tries = -1;
                 }
                 if(tries==0){
