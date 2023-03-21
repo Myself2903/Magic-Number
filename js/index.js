@@ -60,7 +60,7 @@ $('document').ready(function(){
             if(t<=1 || tries <= 0){  //if 60s has passed or tries are over, the game stops
                 clearInterval(interval);    //stops current interval
                 tries = 0; 
-                send(); // send message to show end game
+                send(); // send message to show end game    
             }
             t--; //time decrease
             $("#time").html(`${t}s`);   //update screen counter
