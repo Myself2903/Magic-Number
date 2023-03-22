@@ -18,6 +18,7 @@ $('document').ready(function(){
             start_game();   //restart the classic game
         }
     });  
+    const status_message = $('#status');
    
 
     function mainPage(){
@@ -29,7 +30,7 @@ $('document').ready(function(){
     function start_game(){
         $('#selector').hide();
         $('#game, #status').css("visibility" , "visible");
-        $('#status').css({
+        status_message.css({
             'font-size': 'large',
             'color': 'black',
             'margin-top': '5em'
@@ -39,7 +40,7 @@ $('document').ready(function(){
         magicNum = Math.floor(Math.random()*100)+1; //generate magic number
         tries = 10; //set tries
         console.log("magic num: " + magicNum);
-        $('#status').text("Ingresa un numero:");
+        status_message.text("Ingresa un numero:");
         $('#attempted').hide();
         $('#attempted').html(`
             <tr>
@@ -57,22 +58,30 @@ $('document').ready(function(){
         $('#time_left').css('visibility', 'visible');   //define as visible the div time_left, for game selection.
         
         interval = setInterval(function(){  //set counter's interval
-            if(t<=1 || tries <= 0){  //if 60s has passed or tries are over, the game stops
+            if(t<=1){  //if 60s has passed the game stops
                 clearInterval(interval);    //stops current interval
                 tries = 0; 
                 send(); // send message to show end game    
             }
+            
             t--; //time decrease
             $("#time").html(`${t}s`);   //update screen counter
         },1000);    //1s periods
         
     }
 
+    function answerState(ans_state){
+        status_message.text(`El numero es muy ${ans_state}! `); 
+        tries--;
+        status_message.append(`<b>intentos restantes:<b> ${tries}`);
+        $(".sound_effect")[0].play();
+    }
+
     function send(){
         if(tries > 0){
             answer = $('#num_box').val();   //get answer
             if(answer == ''){
-                $('#status').text("no has ingresado ningun valor.");
+                status_message.text("no has ingresado ningun valor.");
             }else{
                 $('#attempted').show();
                 $('#attempted').append(`
@@ -82,20 +91,28 @@ $('document').ready(function(){
                 </tr>`); //show the tries left on screen
 
                 if(magicNum > answer){ //lower number
-                    $('#status').text("El numero es muy pequeño! "); 
-                    tries--;
-                    $('#status').append("<b>intentos restantes:<b> " + tries);
+                    answerState('pequeño');
                 }else if(magicNum < answer){ //higher number
-                    $('#status').text("El numero es muy grande! ");
-                    tries--;
-                    $('#status').append("<b>intentos restantes:<b> " + tries);
+                    answerState('grande');
                 }else{ //guessed number
-                    $('#status').text("Felicidades! Adivinaste el numero magico! ");
-                    $('#status').css({
+                    status_message.text("Felicidades! Adivinaste el numero magico!");
+                    status_message.css({
                         'font-size': 'xx-large',
                         'color': 'blue',
                         'margin-top': '2em'
                     });
+
+                    $(".sound_effect")[1].play();
+
+                    if($('#time_left').css('visibility')== 'visible'){ //check if game mode is time limit
+                        status_message.html(status_message.html() +`<br><span> En total te tomó ${60-t} segundos</span>`); // show seconds needed to win
+                        $('#status span').css({
+                            'font-size': 'large',
+                            'color': 'black'
+                        })    
+                        clearInterval(interval);
+                    }
+
                     tries = -1;
                 }
                 if(tries==0){
@@ -105,8 +122,17 @@ $('document').ready(function(){
             $('#num_box').focus(); // focus de inputbox
 
         }else if(tries == 0){
-            $('#status').text("No lograste adivinar el número magico, mejor suerte la proxima!");
+            status_message.text("No lograste adivinar el número magico, mejor suerte la proxima!");
+            status_message.css({
+                'font-size': 'xx-large',
+                'color': 'blue',
+                'margin-top': '2em'
+            });
             tries = -1;
+            $(".sound_effect")[2].play();
+            if($('#time_left').css('visibility')== 'visible'){ //check if game mode is time limit    
+                clearInterval(interval);
+            }
         }
         else{
             alert("el juego a terminado, reinicia para continuar");

@@ -15,7 +15,7 @@
 <body>
     <header>
         <button id="home_button">
-            <img src="./assets/house.png">
+            <img src="./assets/img/house.png">
         </button>    
         <h1>Bienvenido al Número Magico</h1>
         <p>Adivina el número entre 0 y 100</p>
@@ -38,14 +38,24 @@
                 <input type="number" id="num_box"><br>
                 <input type="button" id="send_button" value="Enviar">
                 <input type="button" id="restart" value="Reiniciar">
+
+                <audio class="sound_effect">
+                    <source type="audio/mpeg" src="./assets/audio/discordNotEffect.mp3">
+                </audio>
+
+                <audio class="sound_effect">
+                    <source type="audio/mpeg" src="./assets/audio/supremeVictory.mp3">
+                </audio>
+
+                <audio class="sound_effect">
+                    <source type="audio/mpeg" src="./assets/audio/spongebobDisappointedEffect.mp3">
+                </audio>
             </form>
             <div id="time_left"> 
                 <span id="time_info">Tiempo restante</span>  <br>
                 <span id="time"></span>
             </div>
         </div>
-        
-
     </section>
 
 </body>
